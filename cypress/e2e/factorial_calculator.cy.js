@@ -3,7 +3,7 @@ numbers in range (10, 100). You can do it in the language and framework of your 
 */
 
 /// <reference types="cypress" />
-const fs = require('fs');
+
 const factorialCache = {};
 
 //used for calculating expected result
@@ -62,8 +62,8 @@ describe('Factorial calculator', () => {
         const expected = factorial(item)
         if (serverResult !== expected) {
          
-          invalid_calculations.push("❌ factorial result for %s is wrong, expected %s, got local %s,  \n", item, expected, serverResult)
-          console.warn("❌ factorial result for %s is wrong, expected %s, got local %s,  \n", item, expected, serverResult)
+          invalid_calculations.push("\t❌ factorial result for %s is wrong, expected %s, got local %s,  \n", item, expected, serverResult)
+          console.warn("\t❌ factorial result for %s is wrong, expected %s, got local %s,  \n", item, expected, serverResult)
           
           //write this to file
         }
@@ -71,18 +71,10 @@ describe('Factorial calculator', () => {
         
    
       });
+
       console.log(invalid_calculations)
     }
+    cy.writeFile('invalid_calculations_list.txt', invalid_calculations)
     cy.wrap(invalid_calculations).should('be.empty')
   })
-/*
-  it('Verifies TERMS AND AGREEMENT links', () => {
-    cy.visit('https://qainterview.pythonanywhere.com/')
-    cy.constains('Terms and Conditions').click()
-    cy.constains('Privacy').click()
-    cy.intercept('https://qainterview.pythonanywhere.com/factorial').as('reply')
-    Request URL: https://qainterview.pythonanywhere.com/privacy
-    
-    cy.url()
-  }) */
 })
