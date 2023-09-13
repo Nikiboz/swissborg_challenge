@@ -1,0 +1,121 @@
+TestCases for Factorial Calculator:
+- Header: 
+    * Text
+
+- Links 
+    * Links should lead to terms
+    Description: Click on link for terms and agreement, terms and agreement page should be displayed
+    
+    * links should lead to privacy
+    Description: Click on link for privacy, privacy page should be displayed
+
+    * Copyright date and link 
+    Description: Verify that date on the studio copyright is within actual year
+
+    * Navigation:
+    Descirption:
+    Verify that user can get back from terms and agreement page,
+    Verify that user can get back privacy page
+
+
+
+- Input field
+
+    *Test Case 1: Valid Input
+    Input: 5
+    Expected Output: 120
+    Description: Test the calculator with a small positive integer as input.
+
+    *Test Case 2: Input of 0 (Edge Case)
+    Input: 0
+    Expected Output: 1
+    Description: Verify that the calculator correctly handles the special case when the input is 0.
+
+    *Test Case 3: Large Input
+    Input: 1234
+    Expected Output: User should be notified that calculation was not perormed.
+    Description: Test the calculator with a large positive integer input to check if it handles large factorials correctly.
+
+    *Test Case 4: Negative Input (Invalid Input)
+    Input: -5
+    Expected Output: Error message or NaN (Not-a-Number)
+    Description: Verify that the calculator handles negative input gracefully, such as by displaying an error message or returning NaN.
+
+    *Test Case 5: Decimal Input (Invalid Input)
+    Input: 5.5
+    Expected Output: Error message or NaN
+    Description: Test the calculator's ability to handle non-integer input, which should result in an error message or NaN.
+
+    *Test Case 6: Non-numeric Input (Invalid Input)
+    Input: "abc"
+    Expected Output: Error message or NaN
+    Description: Verify that the calculator properly handles non-numeric input by displaying an error message or returning NaN.
+
+    *Test Case 7: Input of 1 (Boundary Case)
+    Input: 1
+    Expected Output: 1
+    Description: Test the calculator with the smallest positive integer input.
+
+    *Test Case 8: Performance Test
+    Input: 10000 (or a large number)
+    Expected Output: (Factorial of 10000)
+    Description: Test the calculator's performance and ability to handle extremely large inputs within a reasonable time frame.
+
+    *Test Case 9: Input of 2 (Boundary Case)
+    Input: 2
+    Expected Output: 2
+    Description: Test the calculator with a small positive integer input to ensure it handles basic cases correctly.
+
+    *Test Case 10: Input of 1.5 (Invalid Input)
+    Input: 1.5
+    Expected Output: Error message or NaN
+    Description: Verify that the calculator correctly handles non-integer input, even if it's a small decimal.
+
+    *Test Case 11: Input of reasonobly big number
+    input: 200
+    Expected Output: Scientific notation of number
+    Description: Verify tath the calculator can display results reasobly big numbers
+
+
+BUGS:
+
+header/Description:
+TYPO: Header reads "Factoriall" and should read "Factorial"
+
+STEPS:
+1.Open https://qainterview.pythonanywhere.com/. Look at the page tab.
+Expected: tab should read Factorial.
+
+
+
+Header: UI:Arrow on calculator is unclickable
+Description: Arrow to the left of the input field looks like a clickable item that should lead to calculations
+Steps:
+Enter digits and click on Arrow
+
+Expected: arrow should be moved to the right of the input
+
+
+Header: Links of terms and Privacy settings should be switched.
+Description: Links of terms and Privacy settings are switched, privacy link leads to terms page and vice versa
+Steps:
+Click on link of terms and agreement
+Click back and click on link of privacy
+Expected: Links should lead to corresponding pages.
+
+
+Header: No error notification on 500 server response
+Description: When server returns 500 user has no notification of calculation failure:
+Steps: 
+Open Calculator page and calculate factorial for:
+1234, -1, 1.5
+Expected result:
+User is notified that calculation failed
+
+Header: Invalid result of calculation
+Description: For numbers bigger than 172 calculation result is: "Infinity"
+Steps:
+Open calculator page
+Calculate factorial for 172, 173 etc.
+Expected result:
+Correct calculation or error should be displayed.
