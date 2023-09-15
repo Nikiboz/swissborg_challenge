@@ -4,7 +4,7 @@ Automated script that calculates in located in /swissborg_challange/cypress/e2e
 To execute script:
 - npm install cypress
 
-- npx cypress run for headless run
+- `npx cypress run --headless -b chrome` for headless run
 Or 
 - npx cypress open
 - Start e2e testing
