@@ -35,25 +35,25 @@ describe('Factorial calculator', () => {
   //array 10-100
   const Input_integers = Array.from({ length: 91 }, (_, i) => i + 10);
 
+beforeEach(() => {
+
+   cy.visit('https://qainterview.pythonanywhere.com/')
+
+})
 
  for (const item of Input_integers) {                                                 //moving this FOR will drasticly increase the performace
   it(`Verifies factorial calculation for ${item}`, () => {
-    let server_result
+    let serverResult
     const expected = factorial(item)
     
-    cy.visit('https://qainterview.pythonanywhere.com/')
+   
     
     cy.intercept('https://qainterview.pythonanywhere.com/factorial').as('reply') //intercepts API requests 
     cy.get('#number').clear().type(item) //Get's input field and types integer from array
     cy.get('#getFactorial').click() //Runs the calculation
      
-    cy.wait('@reply');
-     
-    cy.get('@reply').then((response) => {  
-    server_result = response.response.body.answer;
-    if (server_result !== expected) {
-    cy.writeFile('invalid_calculations_list.txt', `❌ factorial result for ${item} is wrong, expected ${expected}, got ${server_result} from app`, { flag: 'a' }) 
-    }
+    cy.wait('@reply').then((response) => {  
+    serverResult = response.response.body.answer
     expect(response.response.body.answer).to.be.eq(expected)
   });
    
