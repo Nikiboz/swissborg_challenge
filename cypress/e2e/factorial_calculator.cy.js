@@ -30,53 +30,33 @@ function factorial(n) {
   return result;
 }
 
-describe("Factorial calculator", () => {
+
+describe('Factorial calculator', () => {
   //array 10-100
   const Input_integers = Array.from({ length: 91 }, (_, i) => i + 10);
 
-  for (const number of Input_integers) {
-    //moving this FOR will drasticly increase the performace
-    it(`Calculating factorial for ${number}`, () => {
-      let server_result;
-      cy.visit("https://qainterview.pythonanywhere.com/", {
-        onBeforeLoad(win) {
-          cy.spy(win.console, "log").as("consoleLog");
-        },
-      });
 
-      //iterates over array
-
-      cy.intercept("https://qainterview.pythonanywhere.com/factorial").as(
-        "reply"
-      ); //intercepts API requests
-      cy.get("#number").clear().type(item); //Get's input field and types integer from array
-      cy.get("#getFactorial").click(); //Runs the calculation
-
-      cy.wait("@reply");
-
-      cy.get("@reply").should((response) => {
-        console.log(response.body); // Log the response body
-
-        expect(response.response.body).to.have.property("answer");
-        server_result = response.response.body.answer;
-        // Now you can use server_result as needed
-      });
-
-      var invalid_calculations = [];
-      const expected = factorial(number);
-      if (server_result !== expected) {
-        invalid_calculations.push(
-          `❌ factorial result for ${number} is wrong, expected ${expected}, got ${server_result} from network`
-        );
-        cy.log(
-          `❌ factorial result for ${number} is wrong, expected ${expected}, got ${server_result}.`
-        );
-      }
-    });
-
-    cy.writeFile("invalid_calculations_list.txt", invalid_calculations, {
-      flag: "a+",
-    });
-    cy.wrap(invalid_calculations).should("be.empty");
+ for (const item of Input_integers) {                                                 //moving this FOR will drasticly increase the performace
+  it(`Verifies factorial calculation for ${item}`, () => {
+    let server_result
+    const expected = factorial(item)
+    
+    cy.visit('https://qainterview.pythonanywhere.com/')
+    
+    cy.intercept('https://qainterview.pythonanywhere.com/factorial').as('reply') //intercepts API requests 
+    cy.get('#number').clear().type(item) //Get's input field and types integer from array
+    cy.get('#getFactorial').click() //Runs the calculation
+     
+    cy.wait('@reply');
+     
+    cy.get('@reply').then((response) => {  
+    server_result = response.response.body.answer;
+    if (server_result !== expected) {
+    cy.writeFile('invalid_calculations_list.txt', `❌ factorial result for ${item} is wrong, expected ${expected}, got ${server_result} from app`, { flag: 'a' }) 
+    }
+    expect(response.response.body.answer).to.be.eq(expected)
+  });
+   
+  })
   }
-});
+})
