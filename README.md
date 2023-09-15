@@ -1,10 +1,10 @@
 
 # Swissborg Challenge
 
-This repository contains an automated script located in `/swissborg_challange/cypress/e2e`.
+The calculation script is located at `/swissborg_challange/cypress/e2e`.
 
 ## Execution Instructions
-
+0. **Clone repo and navigate to folder**
 1. **Install Cypress**:
    ```bash
    npm install cypress
