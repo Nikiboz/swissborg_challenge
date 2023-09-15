@@ -11,7 +11,8 @@ This repository contains an automated script located in `/swissborg_challange/cy
 2. **For a headless run**:
 	```bash
 	npx cypress run --headless -b chrome
-2.1 **For interactive run**:	
+2.1 **For interactive run**:  
+
 	1.	npx cypress open    
 	2.	In cypress dialogue select E2E     
 	3.	Select `factorial_calculator` spec      
